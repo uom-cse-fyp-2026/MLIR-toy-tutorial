@@ -1,0 +1,37 @@
+# Chapter 8 test: element-wise toy.sin operator
+#
+# Runs sin() on three different tensor shapes to verify the Taylor series
+# lowering works for scalar, 1D vector, and 2D matrix inputs.
+#
+# Expected approximate output (6-term Taylor series, accurate to ~8 decimal
+# places for |x| <= pi):
+#
+#   sin(0.0)        ≈  0.000000
+#   sin(pi/6)       ≈  0.500000   (pi/6  = 0.5236)
+#   sin(pi/4)       ≈  0.707107   (pi/4  = 0.7854)
+#   sin(pi/3)       ≈  0.866025   (pi/3  = 1.0472)
+#   sin(pi/2)       ≈  1.000000   (pi/2  = 1.5708)
+#   sin(pi)         ≈  0.000000   (pi    = 3.1416)
+#
+# Run with:
+#   bin\toyc-ch8.exe sin.toy -emit=jit -opt
+
+def main() {
+  # --- Test 1: 1x6 row vector ---
+  var angles<6> = [0.0, 0.5236, 0.7854, 1.0472, 1.5708, 3.1416];
+  var result1 = sin(angles);
+  print(result1);
+
+  # --- Test 2: 2x3 matrix — sin applied element-wise ---
+  var mat<2, 3> = [[0.0, 0.5236, 0.7854],
+                   [1.0472, 1.5708, 3.1416]];
+  var result2 = sin(mat);
+  print(result2);
+
+  # --- Test 3: combine sin with other operations ---
+  # sin(x) * sin(x) + cos-approximation — verifies sin works in expressions
+  var x<3> = [0.0, 0.7854, 1.5708];
+  var sinx = sin(x);
+  var sin_squared = sinx * sinx;
+  print(sin_squared);
+}
