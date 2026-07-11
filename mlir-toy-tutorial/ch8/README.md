@@ -61,7 +61,7 @@ bin\toyc-ch8.exe ..\mlir\examples\toy\Ch8\sin.toy -emit=jit -opt
 
 ---
 ## Output
-<img width="333" height="93" alt="image" src="https://github.com/user-attachments/assets/e821449e-3f4e-4a8c-846b-521e0d79ca54" />
+<img width="366" height="267" alt="image" src="https://github.com/user-attachments/assets/32b66724-f1cc-4426-8635-19b84d1838fe" />
 
 ---
 
